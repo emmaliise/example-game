@@ -5,4 +5,6 @@ class GameStats():
         
     
     def reset_stats(self):
+        self.level = 1
         self.score = 0
+        self.bonus = 0
