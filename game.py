@@ -10,23 +10,18 @@ def run_game():
 
     screen = pygame.display.set_mode([gm_settings.screen_width, gm_settings.screen_height])
     pygame.display.set_caption(gm_settings.caption)
+                               
+    clock = pygame.time.Clock()
     
     player = Player(screen)
     
     bubbles = pygame.sprite.Group()
 
     while True:
-        screen.fill(gm_settings.bg_color)
         gf.check_events(gm_settings, screen, player, bubbles)
         player.update()
+        gf.update_bubbles(player, bubbles)
         bubbles.update()
-        gf.update_screen(gm_settings, screen, player, bubbles)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                
-        player.blit_me()
-        pygame.display.flip()
-        
+        gf.update_screen(gm_settings, screen, player, bubbles, clock)
     
 run_game()
