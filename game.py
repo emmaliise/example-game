@@ -1,6 +1,7 @@
 import pygame
 from settings import Settings
 from player import Player
+from bubble import Bubble
 import game_functions as gf
 
 def run_game():
@@ -11,12 +12,15 @@ def run_game():
     pygame.display.set_caption(gm_settings.caption)
     
     player = Player(screen)
+    
+    bubbles = pygame.sprite.Group()
 
     while True:
         screen.fill(gm_settings.bg_color)
-        gf.check_events(player)
+        gf.check_events(gm_settings, screen, player, bubbles)
         player.update()
-        gf.update_screen(gm_settings, screen, player)
+        bubbles.update()
+        gf.update_screen(gm_settings, screen, player, bubbles)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -24,6 +28,5 @@ def run_game():
         player.blit_me()
         pygame.display.flip()
         
-    pygame.quit()
     
 run_game()
