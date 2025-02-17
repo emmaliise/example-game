@@ -44,14 +44,21 @@ def create_bubble(game_settings, screen, bubbles):
     
 def update_bubbles(player, bubbles, stats, sb, game_settings):
     hitted_bubble = pygame.sprite.spritecollideany(player, bubbles)
-    if hitted_bubble != None:
+    if hitted_bubble:
         stats.score += hitted_bubble.bubble_radius
         sb.prepare_score()
+        
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prepare_high_score()
+        stats.save_high_score() 
         
         if (int(stats.score / game_settings.bonus_score)) > stats.bonus:
             stats.level += 1
             sb.prepare_level()
             stats.bonus += 1
+            game_settings.increase_speed()
+            
         hitted_bubble.kill()
     
     

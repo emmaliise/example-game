@@ -26,13 +26,13 @@ class Bubble(pygame.sprite.Sprite):
                 random.randint(0, game_settings.screen_height),
             )
         )
-        self.speed = random.randint(1, 5)
-    
-    
+        self.speed = random.uniform(1, 3) * game_settings.bubble_speed_factor
+        
     def update(self):
         self.rect.move_ip(-self.speed, 0)
         if self.rect.right < 0:
             self.kill()
+
             
         
     def blit_me(self):

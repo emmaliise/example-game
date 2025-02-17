@@ -12,3 +12,9 @@ class Settings:
         self.bubble_max_r = 50
         
         self.bonus_score = 1000
+        
+        self.bubble_speed_factor = 1.0
+        self.speedup_scale = 1.1
+        
+    def increase_speed(self):
+        self.bubble_speed_factor *= self.speedup_scale
