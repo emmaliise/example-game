@@ -29,6 +29,15 @@ class Player(pygame.sprite.Sprite):
         if self.moving_down:
             self.rect.move_ip(0, 5)
             
+        if self.moving_left and self.rect.left < 0:
+            self.rect.left = 0
+        if self.moving_right and self.rect.right > self.screen_rect.right:
+            self.rect.right = self.screen_rect.right
+        if self.moving_up and self.rect.top <= 0:
+            self.rect.top = 0
+        if self.moving_down and self.rect.bottom >= self.screen_rect.bottom:
+            self.rect.bottom = self.screen_rect.bottom
+            
         
     def blit_me(self):
         self.screen.blit(self.player, self.rect)
